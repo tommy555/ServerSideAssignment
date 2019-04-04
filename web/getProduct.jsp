@@ -53,7 +53,7 @@
                     $("#vehicleImg").html('<img src="Image/vehicles/' + data.productCode + '.png" class="display-thumbnail" alt="' + data.productName + '"/>');
                     vehicleDetail.append("<h2 class='text-uppercase font-weight-bold'>" + data.productName + "</h2>");
                     vehicleDetail.append("<a href='updateProduct.jsp?pCode="+data.productCode+"'>Update this product</a>");
-                    vehicleDetail.append("<a href='DeleteProduct?pCode="+data.productCode+"' class='ml-2'>Delete this product</a>");
+                    vehicleDetail.append("<a href='DeleteProduct?pCode="+data.productCode+"' class='ml-2' id='deleteProduct'>Delete this product</a>");
                     vehicleDetail.append("<h5 class='text-secondary font-italic'><small>By " + data.productVendor + "</small></h5>");
                     vehicleDetail.append("<br><br><br>");
                     vehicleDetail.append("<h5><strong>Price: <span class='fontcolor-primary'>USD " + data.buyPrice + "</span></strong></h5>");
@@ -102,6 +102,10 @@
                         }
                     }
                 });
+            });
+            
+            $('#deleteProduct').click(function(){
+                alert("You have deleted this product");
             });
         });
 
