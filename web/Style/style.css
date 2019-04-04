@@ -1,0 +1,132 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 30, 2019, 11:51:12 AM
+    Author     : TOMMY
+*/
+
+/*globe var*/
+:root {
+    --primary-color:#4db6ac;
+    --secondary-color:#eceff1;
+    --accent:#fff;
+    --color-black: #000;
+    --color-shadow: #888888;
+    --color-alert: #b71c1c;
+}
+
+.theme-primary {
+    background: var(--primary-color);
+}
+
+.theme-secondary {
+    background: var(--secondary-color);
+}
+
+.font-accent {
+    color: var(--accent);
+}
+
+.fontcolor-primary {
+    color: var(--primary-color);
+}
+
+.fontcolor-secondary {
+    color: var(--secondary-color);
+}
+
+.list-thumbnail {
+    max-width:8rem;
+    max-height:8rem;
+}
+
+.display-thumbnail {
+    max-width:20rem;
+    max-height:20rem;
+}
+
+.border {
+    padding:0.5rem;
+    border: 0.1rem solid var(--color-shadow);
+    border-radius: 0.5rem;
+}
+
+.list-items {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    -webkit-transition: box-shadow 0.5s;
+    -moz-transition: box-shadow 0.5s;
+    -o-transition: box-shadow 0.5s;
+}
+
+.list-items:hover {
+    box-shadow: 5px 10px 8px var(--color-shadow);
+}
+
+.no-list-style,
+.no-list-style:hover {
+    color: var(--color-black);
+    text-decoration: none;
+}
+
+.top-margin {
+    margin-top: 1rem;
+}
+
+.left-margin {
+    margin-left: 1rem;
+}
+
+.apply-btn {
+    background: var(--accent);
+    color: var(--primary-color);
+    border: 0.1rem solid var(--primary-color);
+    margin-top: 1rem;
+    
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    -o-transition: background 0.5s;
+}
+
+.apply-btn:hover {
+    background: var(--primary-color);
+    color: var(--accent);
+}
+
+.alert-btn {
+    background: var(--color-alert);
+    color: var(--accent);
+    border: 0.1rem solid var(--color-alert);
+    margin-top: 1rem;
+}
+
+.lg-btn {
+    width: 8rem;
+    height: 3rem;
+}
+
+/*.no-list-style:hover {
+    color: var(--color-black);
+    text-decoration: none;
+}*/
+
+/*css to be inherited*/
+body {
+    
+}
+
+/*My custom style*/
+
+
+
+.nav-link {
+    color: var(--accent);
+}
+
+.nav-link:hover{
+    color: var(--primary-color);
+    background: var(--accent);
+}
