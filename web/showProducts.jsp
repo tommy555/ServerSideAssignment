@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+
         <title>All Products</title>
         <jsp:include page="headscript.jsp"/>
     </head>
@@ -44,6 +44,10 @@
                     <div class="row border">
                         <jsp:include page="minispinner.html"/>
                         <ul class="nav flex-column" id="brandsList"></ul>
+                    </div>
+
+                    <div class="row border">
+                        <a href="CreateProduct.jsp">Create new product</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +86,7 @@
 
             //define getVehicles function
             let getVehicles = function (type, order, orderBy) {
-                if($("#spinners").is(":hidden")){
+                if ($("#spinners").is(":hidden")) {
                     $("#spinners").toggle()
                 }
                 $.ajax({
@@ -92,7 +96,7 @@
                     success: function (data) {
                         $("#spinners").toggle();
                         retrievedVehicles = data.products;
-                        
+
                         //clear display and show vehicles
                         clearDisplay();
                         $.each(retrievedVehicles, function (i, e) {

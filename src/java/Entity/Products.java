@@ -35,6 +35,7 @@ import org.json.simple.JSONObject;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Products.findAll", query = "SELECT p FROM Products p")
+    , @NamedQuery(name = "Products.countTotalProduct", query = "SELECT count(p.productCode) FROM Products p")
     , @NamedQuery(name = "Products.findByProductCode", query = "SELECT p FROM Products p WHERE p.productCode = :productCode")
     , @NamedQuery(name = "Products.findByProductName", query = "SELECT p FROM Products p WHERE p.productName = :productName")
     , @NamedQuery(name = "Products.findByProductScale", query = "SELECT p FROM Products p WHERE p.productScale = :productScale")

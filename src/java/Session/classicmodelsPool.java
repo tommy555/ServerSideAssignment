@@ -77,6 +77,9 @@ public class classicmodelsPool {
     }
 
     public void updateProduct(Products updatedProduct) {
+        if (!em.contains(updatedProduct)) {
+            updatedProduct = em.merge(updatedProduct);
+        }
         em.merge(updatedProduct);
     }
 
@@ -85,6 +88,18 @@ public class classicmodelsPool {
             selectedProduct = em.merge(selectedProduct);
         }
         em.remove(selectedProduct);
+    }
+    
+    public String getNewProductNumber() {
+        Long total = (Long) em.createNamedQuery("Products.countTotalProduct").getSingleResult();
+        return String.valueOf(total.intValue()+1);
+    }
+    
+    public void createNewProduct(Products newProduct){
+         if (!em.contains(newProduct)) {
+            newProduct = em.merge(newProduct);
+        }
+        em.persist(newProduct);
     }
 
     //Orders
