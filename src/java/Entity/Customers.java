@@ -35,6 +35,7 @@ import org.json.simple.JSONObject;
 @NamedQueries({
     @NamedQuery(name = "Customers.findAll", query = "SELECT c FROM Customers c")
     , @NamedQuery(name = "Customers.findNamelist", query = "SELECT c.customerName FROM Customers c")
+    , @NamedQuery(name = "Customers.findTotalCustomer", query = "SELECT count(c.customerNumber) FROM Customers c")
     , @NamedQuery(name = "Customers.findByCustomerNumber", query = "SELECT c FROM Customers c WHERE c.customerNumber = :customerNumber")
     , @NamedQuery(name = "Customers.findByCustomerName", query = "SELECT c FROM Customers c WHERE c.customerName = :customerName")
     , @NamedQuery(name = "Customers.findByContactLastName", query = "SELECT c FROM Customers c WHERE c.contactLastName = :contactLastName")

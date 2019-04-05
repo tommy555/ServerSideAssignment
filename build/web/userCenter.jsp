@@ -19,6 +19,13 @@
 
         <div class="container">
             <div class="row mt-3">
+                <div class="form-group">
+                    <label for="selectCustomer">Select customer:</label>
+                    <select name="selectCustomer" id="selectCustomer"></select>
+                    <a href="createCustomer.jsp">Create new customer</a>
+                </div>
+            </div>
+            <div class="row mt-3">
 
                 <!--panel goes here-->
                 <div class="col-sm-2">
@@ -53,8 +60,24 @@
         $(document).ready(function () {
 
             //global variable
-            let custNum = 363;
+            var custName = "363";
             var customer = {};
+
+            //get customer list
+            $.ajax({
+                type: 'post',
+                url: 'GetCustomerNamelist',
+                async: false,
+                success: function (data) {
+                    let customers = JSON.parse(data.customers);
+                    $.each(customers, function (i, e) {
+                        $("#selectCustomer").append("<option>" + e + "</option>");
+                    });
+                    custName = customers[0];
+                }
+            });
+
+
 
             //def show customer function
             let showCustomer = function () {
@@ -87,18 +110,28 @@
 
             //get customer detail from api
             //get data from API
-            $.ajax({
-                type: 'post',
-                url: 'GetSingleCustomer',
-                data: {custNum: custNum},
-                async: false,
-                success: function (data) {
-                    //display data
-                    customer = data.customer;
-                    //show customer after finish loading
-                    showCustomer();
-                }
+
+            let getCustomer = function () {
+                $.ajax({
+                    type: 'post',
+                    url: 'GetCustomerByName',
+                    data: {custName: custName},
+                    async: false,
+                    success: function (data) {
+                        //display data
+                        customer = data.customer;
+                        //show customer after finish loading
+                        showCustomer();
+                    }
+                });
+            }
+
+            $("#selectCustomer").change(function () {
+                custName = $(this).val();
+                getCustomer();
             });
+            
+            getCustomer();
 
             //view history behavior
             $("#viewHistory").click(function () {
@@ -109,7 +142,7 @@
                 $.ajax({
                     type: "get",
                     url: "GetAllOrders",
-                    data: {custNum: custNum},
+                    data: {custName: custName},
                     async: false,
                     success: function (data) {
                         //display content
@@ -125,7 +158,7 @@
                                     '                                <th colspan="5">Status: ' + e.status + '</th>' +
                                     '                            </tr>' +
                                     '                            <tr>' +
-                                    '                                <th colspan="5">Order details:</th>' +
+                                    '                                <th colspan="5">Order details:<a href="updateOrder.jsp?orderNum='+e.orderNumber+'">Update order</a><a href="deleteOrder.jsp?orderNum='+e.orderNumber+'" class="ml-4">Delete order</a></th>' +
                                     '                            </tr>' +
                                     '                            <tr>' +
                                     '                                <th>Order number</th>' +
@@ -199,7 +232,7 @@
                         '                                <td colspan="2">' +
                         '                                    <div class="form-group">' +
                         '                                        <label for="customerName">Contact first name:</label>' +
-                        '                                        <input type="text" name="customerName" value="' + customer.contactFirstName + '" class="form-control" id="contactFirstName" required/>' +
+                        '                                        <input type="text" name="contactFirstName" value="' + customer.contactFirstName + '" class="form-control" id="contactFirstName" required/>' +
                         '                                    </div>' +
                         '                                </td>' +
                         '                                <td colspan="2">' +
@@ -280,6 +313,20 @@
                 //deleteAccount behavior
                 $("#deleteAccount").click(function () {
                     alert("Delete account");
+                    $.ajax({
+                        type: 'post',
+                        url: 'DeleteCustomer',
+                        data: {custName:custName},
+                        async: false,
+                        success: function (data) {
+                            if (data.success) {
+                                alert("Delete success");
+                                window.location.replace("userCenter.jsp");
+                            } else {
+                                alert("Delete fail");
+                            }
+                        }
+                    });
                 });
 
                 //updateForm behavior
@@ -292,6 +339,7 @@
                         success: function (data) {
                             if (data.success) {
                                 alert("Update success");
+                                window.location.replace("userCenter.jsp");
                             } else {
                                 alert("Update fail");
                             }

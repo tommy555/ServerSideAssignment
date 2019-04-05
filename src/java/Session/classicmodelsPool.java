@@ -7,20 +7,21 @@ package Session;
 
 import Entity.Customers;
 import Entity.Employees;
-import Entity.Offices;
 import Entity.Orderdetails;
-import Entity.OrderdetailsPK;
 import Entity.Orders;
-import Entity.Payments;
-import Entity.PaymentsPK;
 import Entity.Productlines;
 import Entity.Products;
+import java.util.HashSet;
 
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -48,12 +49,50 @@ public class classicmodelsPool {
     }
 
     public void updateCustomer(Customers updatedCustomer) {
+        if (!em.contains(updatedCustomer)) {
+            updatedCustomer = em.merge(updatedCustomer);
+        }
         em.merge(updatedCustomer);
     }
 
     public List<String> findCustomerNamelist() {
         return em.createNamedQuery("Customers.findNamelist").getResultList();
     }
+
+    public int findUsableCustomerNUmber() {
+        Long total = (Long) em.createNamedQuery("Customers.findTotalCustomer").getSingleResult();
+        return (total.intValue() + 1);
+    }
+
+    public void createCustomer(Customers customer) {
+        validateCustomers(customer);
+        if (!em.contains(customer)) {
+            customer = em.merge(customer);
+        }
+        em.persist(customer);
+    }
+    
+    public void removeCustomer(Customers c) {
+        if (!em.contains(c)) {
+            c = em.merge(c);
+        }
+        em.remove(c);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     //Products
     public List<String> findAllProductlinesName() {
@@ -89,19 +128,29 @@ public class classicmodelsPool {
         }
         em.remove(selectedProduct);
     }
-    
+
     public String getNewProductNumber() {
         Long total = (Long) em.createNamedQuery("Products.countTotalProduct").getSingleResult();
-        return String.valueOf(total.intValue()+1);
+        return String.valueOf(total.intValue() + 1);
     }
-    
-    public void createNewProduct(Products newProduct){
-         if (!em.contains(newProduct)) {
+
+    public void createNewProduct(Products newProduct) {
+        if (!em.contains(newProduct)) {
             newProduct = em.merge(newProduct);
         }
         em.persist(newProduct);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //Orders
     public List<Orders> findAllOrders() {
         return em.createNamedQuery("Orders.findAll").getResultList();
@@ -129,9 +178,44 @@ public class classicmodelsPool {
         return ((Orders) em.createNamedQuery("Orders.findByOrderNumber").setParameter("orderNumber", orderNum).getSingleResult());
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
     //Employee
     public Employees findEmployeeByNumber(int number) {
         return ((Employees) em.createNamedQuery("Employees.findByEmployeeNumber").setParameter("employeeNumber", number).getSingleResult());
+    }
+
+    public List<String> findSalesRepresentativeList() {
+        return em.createNamedQuery("Employees.findRepresentativeList").getResultList();
+    }
+
+    public void validateCustomers(Customers cust) {
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Customers>> constraintViolations = validator.validate(cust);
+
+        if (constraintViolations.size() > 0) {
+            Set<String> violationMessages = new HashSet<String>();
+
+            for (ConstraintViolation<Customers> constraintViolation : constraintViolations) {
+                violationMessages.add(constraintViolation.getPropertyPath() + ": " + constraintViolation.getMessage());
+            }
+
+            throw new RuntimeException("Customer is not valid:\n" + StringUtils.join(violationMessages, "\n"));
+        }
     }
 
 }

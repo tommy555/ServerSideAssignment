@@ -32,6 +32,7 @@ import org.json.simple.JSONObject;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Employees.findAll", query = "SELECT e FROM Employees e")
+    , @NamedQuery(name = "Employees.findRepresentativeList", query = "SELECT e.employeeNumber FROM Employees e")
     , @NamedQuery(name = "Employees.findByEmployeeNumber", query = "SELECT e FROM Employees e WHERE e.employeeNumber = :employeeNumber")
     , @NamedQuery(name = "Employees.findByLastName", query = "SELECT e FROM Employees e WHERE e.lastName = :lastName")
     , @NamedQuery(name = "Employees.findByFirstName", query = "SELECT e FROM Employees e WHERE e.firstName = :firstName")
@@ -205,7 +206,7 @@ public class Employees implements Serializable {
     public String toString() {
         return "Entity.Employees[ employeeNumber=" + employeeNumber + " ]";
     }
-    
+
     public JSONObject toJson() {
         JSONObject jobj = new JSONObject();
         jobj.put("employeeNumber", employeeNumber);
@@ -218,5 +219,5 @@ public class Employees implements Serializable {
         jobj.put("jobTitle", jobTitle);
         return jobj;
     }
-    
+
 }

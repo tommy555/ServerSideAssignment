@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/src/java/Session/classicmodelsPool.java</file>
-            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/web/showProducts.jsp</file>
-            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/src/java/Entity/Products.java</file>
-            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/web/CreateProduct.jsp</file>
-            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/src/java/CreateProduct.java</file>
-            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/web/updateProduct.jsp</file>
+            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/src/java/Servlet/CreateCustomer.java</file>
+            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/web/createCustomer.jsp</file>
+            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/src/java/Entity/Customers.java</file>
+            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/src/java/API/GetSalesRepresentativeList.java</file>
+            <file>file:/E:/Documents/NetBeansProjects/ServerSideAssignment/web/userCenter.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -46,16 +46,17 @@ public class GetAllOrders extends HttpServlet {
         JSONObject jobj = new JSONObject();
         JSONArray jarr = new JSONArray();
 
-        String custNum = request.getParameter("custNum");
-        if (custNum.equalsIgnoreCase("all")) {
+        String custName = request.getParameter("custName");
+
+        if (custName.equalsIgnoreCase("all")) {
             //find all orders
             for (Orders e : classicmodelsPool.findAllOrders()) {
                 jarr.add(e.toJson());
             }
         } else {
             //find orders by customer number
-            
-            Customers cust = classicmodelsPool.findCustomerByCustomerNum(Integer.valueOf(custNum));
+
+            Customers cust = classicmodelsPool.findCustomerByCustomerName(custName);
             for (Orders e : classicmodelsPool.findAllOrdersByCustNum(cust)) {
                 jarr.add(e.toJson());
             }
