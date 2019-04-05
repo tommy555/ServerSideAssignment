@@ -177,6 +177,20 @@ public class classicmodelsPool {
     public Orders findOrdersByOrderNum(int orderNum) {
         return ((Orders) em.createNamedQuery("Orders.findByOrderNumber").setParameter("orderNumber", orderNum).getSingleResult());
     }
+    
+    public void updateOrder(Orders order) {
+        if (!em.contains(order)) {
+            order = em.merge(order);
+        }
+        em.merge(order);
+    }
+    
+    public void removeOrder(Orders order) {
+        if (!em.contains(order)) {
+            order = em.merge(order);
+        }
+        em.remove(order);
+    }
 
     
     

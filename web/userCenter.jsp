@@ -130,7 +130,7 @@
                 custName = $(this).val();
                 getCustomer();
             });
-            
+
             getCustomer();
 
             //view history behavior
@@ -155,10 +155,10 @@
                                     '                                <th colspan="5">Order number: ' + e.orderNumber + '</th>' +
                                     '                            </tr>' +
                                     '                            <tr>' +
-                                    '                                <th colspan="5">Status: ' + e.status + '</th>' +
+                                    '                                <th colspan="5">Status: '+e.status+' <a href="updateOrder.jsp?orderNum=' + e.orderNumber + '">update order</a></th>' +
                                     '                            </tr>' +
                                     '                            <tr>' +
-                                    '                                <th colspan="5">Order details:<a href="updateOrder.jsp?orderNum='+e.orderNumber+'">Update order</a><a href="deleteOrder.jsp?orderNum='+e.orderNumber+'" class="ml-4">Delete order</a></th>' +
+                                    '                                <th colspan="5">Order details:<a href="deleteOrder.jsp?orderNum=' + e.orderNumber + '" class="ml-4">Delete order</a></th>' +
                                     '                            </tr>' +
                                     '                            <tr>' +
                                     '                                <th>Order number</th>' +
@@ -172,6 +172,7 @@
                                     '                        <tbody class="orderdetails">' +
                                     '                        </tbody>' +
                                     '                    </table>');
+
                             $.each(e.Orderdetails, function (a, b) {
                                 $(".orderdetails").last().append(
                                         '                            <tr>' +
@@ -316,7 +317,7 @@
                     $.ajax({
                         type: 'post',
                         url: 'DeleteCustomer',
-                        data: {custName:custName},
+                        data: {custName: custName},
                         async: false,
                         success: function (data) {
                             if (data.success) {
