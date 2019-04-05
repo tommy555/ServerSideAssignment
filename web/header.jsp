@@ -24,9 +24,22 @@
                 <a class="nav-link" href="userCenter.jsp">User center</a>
             </li>
             
-            <li class="nav-item">
-                <a  class="nav-link" href="register.jsp">Login / Register</a>
-            </li>
+            <%
+                if(request.isUserInRole("admin")) {
+                    out.println("<li class='nav-item'>");
+                    out.println("<a  class='nav-link' href='logout.jsp'>Logout</a>");
+                    out.println("</li>");
+                    
+                
+            
+                }
+                else {
+                    
+                    out.println("<li class='nav-item'>");
+                    out.println("<a  class='nav-link' href='login.jsp'>Login</a>");
+                    out.println("</li>");
+                }
+            %>
         </ul>
 
     </nav>

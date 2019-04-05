@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	 version="3.0">
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-    <description>MySQL Test App</description> 
-    <resource-ref> 
-        <description>DB Connection</description> 
-        <res-ref-name>jdbc/classicmodels</res-ref-name> 
-        <res-type>javax.sql.DataSource</res-type> 
-        <res-auth>Container</res-auth> 
-    </resource-ref> 
+    <description>MySQL Test App</description>
+    <security-constraint>
+        <display-name>user center</display-name>
+        <web-resource-collection>
+            <web-resource-name>user center</web-resource-name>
+            <description/>
+            <url-pattern>/userCenter.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/loginerror.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>admin</role-name>
+    </security-role>
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/classicmodels</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 </web-app>

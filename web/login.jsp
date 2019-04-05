@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : Mar 30, 2019, 2:57:41 AM
+    Document   : register
+    Created on : Mar 30, 2019, 2:57:51 AM
     Author     : TOMMY
 --%>
 
@@ -9,55 +9,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
         <jsp:include page="headscript.jsp"/>
+        <title>Login</title>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        <h3>Login</h3>
-        <form action='Login' method='post' id="loginForm">
-            <p>Email</p>
-            <input type='email' id="email" name="email" required/>
-            <p>Password</p>
-            <input type="password" id='password' name='password' required/>
-            <input type="submit" value="Log in"/>
-        </form>
+
+        <div class="container">
+
+            <div class="row">
+
+                <!--login form goes here-->
+                <div class="col-sm-5 top-margin">
+                    <h3>Login</h3>
+                    <form id="loginForm" action="<%=response.encodeURL("j_security_check")%>" method="POST">
+
+                        <div class="form-group">
+                            <label for="loginEmail">Username:</label>
+                            <input class="form-control" type="text" id="loginEmail" name="j_username" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for='loginPassword'>Password:</label>
+                            <input class="form-control" type="password" id="loginPassword" name="j_password" required/>
+                        </div>
+
+
+                        <input class="form-control apply-btn" type="submit" value="Login"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <jsp:include page="footer.jsp"/>
-        
-        <!--javascript goes here-->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("#loginForm").submit(function(e) {
-                    let email = $("#email").val();
-                    let pass = $("#password").val();
-                    $.ajax({
-                        type:"post",
-                        url:"GetUser",
-                        data:{
-                            email:email,
-                            password:pass
-                        },
-                        async:false,
-                        success:function(data){
-                            alert("Success send");
-//                            if(data.isExist) {
-//                                alert("User is exist in database");
-//                            }
-//                            else {
-//                                alert("User doesn't exist in databse")l;
-//                            }
-//                            
-//                            if(data.passCorrect) {
-//                                alert("Password is correct");
-//                            }
-//                            else{
-//                                alert("Password is wrong");
-//                            }
-                        }
-                    });
-                    return false;
-                });
-            });
-        </script>
     </body>
 </html>

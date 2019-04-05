@@ -19,7 +19,9 @@
         <br>
         <br>
         <br>
-        <h1>Hello World!</h1>
+        <h1>Username: admin</h1>
+        <h1>Password: admin</h1>
+        <h1>Security method: form-based text file</h1>
         <jsp:include page="footer.jsp"/>
     </body>
 </html>
